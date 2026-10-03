@@ -1,17 +1,38 @@
-from flask import Flask, render_template
-#crear la ap[licacion web con flask
+from flask import Flask, render_template, request, redirect, url_for
+
 app = Flask(__name__)
 
-# Definir la ruta principal (la pagina de inicio)
+# Lista temporal en memoria para almacenar los pozos
+lista_pozos = []
 
 @app.route('/')
 def inicio():
-# Esta funcion carga y muestra el archivo HTML
+# Le pasamos la lista de pozos a la plantilla HTML
 
- return render_template('index.html')
-# Punto de entrada para ejecutar la aplicacion  
+ return render_template('index.html', pozos=lista_pozos)
+
+@app.route('/crear-pozo', methods=['POST'])
+def crear_pozo():
+    # Capturamos los datos enviados desde el formulario
+
+    nombre = request.form['nombre']
+    capacidad = request.form['capacidad']
+    especie = request.form['especie']
+
+    # Creamos un diccionario con la información del pozo
+
+    nuevo_pozo = {
+        'nombre': nombre,
+        'capacidad': capacidad,
+        'especie': especie
+    }
+    # Agregamos el nuevo pozo a nuestra lista
+    lista_pozos.append(nuevo_pozo)
+
+# Redirigimos a la página principal para ver el resultado
+
+    return redirect(url_for('inicio'))
 
 if __name__ == '__main__':
-# debug=True permite que el servidor se actualice solo al hacer cambios
 
  app.run(debug=True)

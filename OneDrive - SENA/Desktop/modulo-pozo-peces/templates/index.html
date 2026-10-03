@@ -5,7 +5,50 @@
     <title>Gestión de Pozos - Piscicultura 🐟</title>
 </head>
 <body>
+
     <h1>Módulo de Gestión de Pozos 🌊</h1>
-    <p>Bienvenido al sistema de administración para la cría de peces.</p>
+
+    <!-- Formulario para ingresar un nuevo pozo -->
+    <h2>Registrar Nuevo Pozo 📝</h2>
+    <form action="/crear-pozo" method="POST">
+        <label for="nombre">Nombre o Código del Pozo:</label><br>
+        <input type="text" id="nombre" name="nombre" placeholder="Ej: Pozo 01" required><br><br>
+
+        <label for="capacidad">Capacidad / Dimensiones:</label><br>
+        <input type="text" id="capacidad" name="capacidad" placeholder="Ej: 100 m³" required><br><br>
+
+        <label for="especie">Especie de Pez:</label><br>
+        <input type="text" id="especie" name="especie" placeholder="Ej: Tilapia Roja" required><br><br>
+
+        <button type="submit">Guardar Pozo 💾</button>
+    </form>
+
+    <hr>
+
+    <!-- Tabla para listar los pozos registrados -->
+    <h2>Pozos Registrados 📋</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre / Código</th>
+                <th>Capacidad</th>
+                <th>Especie</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for pozo in pozos %}
+            <tr>
+                <td>{{ pozo.nombre }}</td>
+                <td>{{ pozo.capacidad }}</td>
+                <td>{{ pozo.especie }}</td>
+            </tr>
+            {% else %}  
+            <tr>
+                <td colspan="3">No hay pozos registrados aún.🐟</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </body>
 </html>
