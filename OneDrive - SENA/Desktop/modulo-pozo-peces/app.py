@@ -32,7 +32,16 @@ def crear_pozo():
 # Redirigimos a la página principal para ver el resultado
 
     return redirect(url_for('inicio'))
+@app.route('/eliminar-pozo/<int:id>')
+def eliminar_pozo(id):
+    # Verificamos que el índice exista en nuestra lista
+    if 0 <= id < len(lista_pozos):
+        lista_pozos.pop(id) # Eliminamos el elemento de la lista
+    
+    # Redirigimos de nuevo a la página principal
+    return redirect(url_for('inicio'))
 
 if __name__ == '__main__':
+ 
 
  app.run(debug=True)

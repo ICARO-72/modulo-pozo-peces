@@ -29,12 +29,13 @@
 
     <!-- Tabla para listar los pozos registrados -->
     <h2>Pozos Registrados 📋</h2>
-    <table border="1">
+    <table>
         <thead>
             <tr>
                 <th>Nombre / Código</th>
                 <th>Capacidad</th>
                 <th>Especie</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -43,10 +44,14 @@
                 <td>{{ pozo.nombre }}</td>
                 <td>{{ pozo.capacidad }}</td>
                 <td>{{ pozo.especie }}</td>
+                <td>
+                    <!-- Usamos loop.index0 para saber la posición del pozo en la lista -->
+                    <a href="/eliminar-pozo/{{ loop.index0 }}" onclick="return confirm('¿Estás seguro de eliminar este pozo?');">Eliminar 🗑️</a>
+                </td>
             </tr>
             {% else %}  
             <tr>
-                <td colspan="3">No hay pozos registrados aún.🐟</td>
+                <td colspan="4">No hay pozos registrados aún.🐟</td>
             </tr>
             {% endfor %}
         </tbody>
